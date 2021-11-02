@@ -1,0 +1,14 @@
+vendor
+server.rsa.crt
+server.rsa.key
+*.pem
+*.json
+*.yml
+*.toml
+*.dot
+*.out
+*.so
+bench_res
+.cover
+.idea
+*DS_Store
