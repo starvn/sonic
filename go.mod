@@ -7,6 +7,7 @@ require (
 	github.com/hashicorp/golang-lru v0.5.4
 	github.com/rs/cors v1.6.0
 	github.com/starvn/turbo v1.0.0
+	github.com/unrolled/secure v1.0.9
 )
 
 require (
