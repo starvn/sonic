@@ -4,6 +4,7 @@ go 1.17
 
 require (
 	github.com/gin-gonic/gin v1.7.4
+	github.com/hashicorp/golang-lru v0.5.4
 	github.com/rs/cors v1.6.0
 	github.com/starvn/turbo v1.0.0
 )
