@@ -4,10 +4,13 @@ go 1.17
 
 require (
 	github.com/alexeyco/binder v0.0.0-20180729220023-2a21303f588a
+	github.com/eapache/go-resiliency v1.2.0
 	github.com/gin-gonic/gin v1.7.4
 	github.com/google/cel-go v0.9.0
 	github.com/hashicorp/golang-lru v0.5.4
+	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
 	github.com/rs/cors v1.6.0
+	github.com/sony/gobreaker v0.5.0
 	github.com/starvn/turbo v1.0.0
 	github.com/unrolled/secure v1.0.9
 	github.com/yuin/gopher-lua v0.0.0-20190206043414-8bfc7677f583
