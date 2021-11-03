@@ -22,7 +22,7 @@ import (
 	"github.com/unrolled/secure"
 )
 
-const Namespace = "github.com/starvn/sonic/secure"
+const Namespace = "github.com/starvn/sonic/http/secure"
 
 func ConfigGetter(e config.ExtraConfig) interface{} {
 	v, ok := e[Namespace]

@@ -18,7 +18,7 @@ package gin
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/starvn/sonic/secure"
+	"github.com/starvn/sonic/http/secure"
 	"github.com/starvn/turbo/config"
 	"net/http"
 	"net/http/httptest"

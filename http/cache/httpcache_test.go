@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package httpcache
+package cache
 
 import (
 	"bytes"

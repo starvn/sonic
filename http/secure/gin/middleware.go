@@ -19,7 +19,7 @@ package gin
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
-	hsec "github.com/starvn/sonic/secure"
+	hsec "github.com/starvn/sonic/http/secure"
 	"github.com/starvn/turbo/config"
 	"github.com/unrolled/secure"
 )

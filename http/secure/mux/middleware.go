@@ -17,7 +17,7 @@
 package mux
 
 import (
-	hsec "github.com/starvn/sonic/secure"
+	hsec "github.com/starvn/sonic/http/secure"
 	"github.com/starvn/turbo/config"
 	"github.com/starvn/turbo/route/mux"
 	"github.com/unrolled/secure"
