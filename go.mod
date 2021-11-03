@@ -16,6 +16,7 @@ require (
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/viper v1.9.0
 	github.com/starvn/turbo v1.0.0
+	github.com/streadway/amqp v1.0.0
 	github.com/unrolled/secure v1.0.9
 	github.com/yuin/gopher-lua v0.0.0-20190206043414-8bfc7677f583
 	gopkg.in/Graylog2/go-gelf.v2 v2.0.0-20191017102106-1550ee647df0
