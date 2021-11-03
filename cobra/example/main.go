@@ -18,7 +18,7 @@ package main
 
 import (
 	cmd "github.com/starvn/sonic/cobra"
-	"github.com/starvn/sonic/viper"
+	"github.com/starvn/sonic/parser/viper"
 	"github.com/starvn/turbo/config"
 	"github.com/starvn/turbo/log"
 	"github.com/starvn/turbo/proxy"
