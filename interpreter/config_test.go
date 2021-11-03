@@ -33,7 +33,7 @@ func TestParse(t *testing.T) {
 				source,
 			},
 			"md5": map[string]interface{}{
-				source: "2dbeae66cdfeafafec7fdf5bc601a27b",
+				source: "49ae50f58e35f4821ad4550e1a4d1de0",
 			},
 			"pre":       "pre",
 			"post":      "post",

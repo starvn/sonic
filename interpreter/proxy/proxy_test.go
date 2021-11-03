@@ -1,3 +1,6 @@
+//go:build !race
+// +build !race
+
 /*
  * Copyright (c) 2021 Huy Duc Dao
  *
