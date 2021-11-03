@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/alexeyco/binder v0.0.0-20180729220023-2a21303f588a
 	github.com/gin-gonic/gin v1.7.4
+	github.com/google/cel-go v0.9.0
 	github.com/hashicorp/golang-lru v0.5.4
 	github.com/rs/cors v1.6.0
 	github.com/starvn/turbo v1.0.0
@@ -14,6 +15,7 @@ require (
 
 require (
 	github.com/alecthomas/chroma v0.9.4 // indirect
+	github.com/antlr/antlr4/runtime/Go/antlr v0.0.0-20210826220005-b48c857c3a0e // indirect
 	github.com/dlclark/regexp2 v1.4.0 // indirect
 	github.com/fatih/color v1.13.0 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
@@ -28,11 +30,13 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/starvn/flatex v1.0.2 // indirect
+	github.com/stoewer/go-strcase v1.2.0 // indirect
 	github.com/ugorji/go/codec v1.2.6 // indirect
 	github.com/valyala/fastrand v1.1.0 // indirect
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
 	golang.org/x/sys v0.0.0-20211004093028-2c5d950f24ef // indirect
 	golang.org/x/text v0.3.7 // indirect
+	google.golang.org/genproto v0.0.0-20210831024726-fe130286e0e2 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )
