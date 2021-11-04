@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-// Package expl provides a Common Expression Language (CEL) module for the Sonic API Gateway
-package expl
+// Package explang provides a Common Expression Language (CEL) module for the Sonic API Gateway
+package explang
 
 import (
 	"context"
 	"fmt"
 	"github.com/google/cel-go/cel"
-	"github.com/starvn/sonic/expl/internal"
+	"github.com/starvn/sonic/explang/internal"
 	"github.com/starvn/turbo/config"
 	"github.com/starvn/turbo/log"
 	"github.com/starvn/turbo/proxy"

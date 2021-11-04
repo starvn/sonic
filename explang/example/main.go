@@ -20,7 +20,7 @@ import (
 	"context"
 	"flag"
 	"github.com/gin-gonic/gin"
-	cel "github.com/starvn/sonic/expl"
+	cel "github.com/starvn/sonic/explang"
 	"github.com/starvn/turbo/config"
 	logging "github.com/starvn/turbo/log"
 	"github.com/starvn/turbo/proxy"
@@ -37,7 +37,7 @@ func main() {
 	port := flag.Int("p", 0, "Port of the service")
 	logLevel := flag.String("l", "DEBUG", "Logging level")
 	debug := flag.Bool("d", false, "Enable the debug")
-	configFile := flag.String("c", "expl/example/sonic.json", "Path to the configuration filename")
+	configFile := flag.String("c", "explang/example/sonic.json", "Path to the configuration filename")
 	flag.Parse()
 
 	parser := config.NewParser()

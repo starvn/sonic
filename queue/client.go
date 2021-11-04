@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-// Package amqp provides an AMQP compatible backend for the Sonic API Gateway
-package amqp
+// Package queue provides an AMQP compatible backend for the Sonic API Gateway
+package queue
 
 import (
 	"context"

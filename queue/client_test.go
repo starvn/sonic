@@ -17,7 +17,7 @@
  * limitations under the License.
  */
 
-package amqp
+package queue
 
 import (
 	"bytes"

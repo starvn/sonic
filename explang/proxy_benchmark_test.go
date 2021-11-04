@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package expl
+package explang
 
 import (
 	"bytes"
 	"context"
-	"github.com/starvn/sonic/expl/internal"
+	"github.com/starvn/sonic/explang/internal"
 	"github.com/starvn/turbo/config"
 	"github.com/starvn/turbo/log"
 	"github.com/starvn/turbo/proxy"
