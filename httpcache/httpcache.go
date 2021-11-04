@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-// Package cache introduces an in-memory-cached http client into the Sonic stack
-package cache
+// Package httpcache introduces an in-memory-cached http client into the Sonic stack
+package httpcache
 
 import (
 	"context"
@@ -26,7 +26,7 @@ import (
 	"net/http"
 )
 
-const Namespace = "github.com/starvn/sonic/http/cache"
+const Namespace = "github.com/starvn/sonic/httpcache"
 
 var (
 	memTransport = httpcache.NewMemoryCacheTransport()

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package secure
+package httpsecure
 
 import (
 	"encoding/json"

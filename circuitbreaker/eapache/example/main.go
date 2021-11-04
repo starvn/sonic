@@ -20,7 +20,7 @@ import (
 	"context"
 	"flag"
 	"github.com/gin-gonic/gin"
-	cel "github.com/starvn/sonic/expl"
+	cel "github.com/starvn/sonic/explang"
 	"github.com/starvn/turbo/config"
 	logging "github.com/starvn/turbo/log"
 	"github.com/starvn/turbo/proxy"

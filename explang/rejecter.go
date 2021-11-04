@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-package expl
+package explang
 
 import (
 	"fmt"
 	"github.com/google/cel-go/cel"
-	"github.com/starvn/sonic/expl/internal"
+	"github.com/starvn/sonic/explang/internal"
 	"github.com/starvn/turbo/config"
 	"github.com/starvn/turbo/log"
 	"time"

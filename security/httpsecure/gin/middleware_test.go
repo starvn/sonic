@@ -18,7 +18,7 @@ package gin
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/starvn/sonic/http/secure"
+	"github.com/starvn/sonic/security/httpsecure"
 	"github.com/starvn/turbo/config"
 	"net/http"
 	"net/http/httptest"
@@ -29,7 +29,7 @@ func TestRegister(t *testing.T) {
 	gin.SetMode(gin.TestMode)
 	engine := gin.New()
 	cfg := config.ExtraConfig{
-		secure.Namespace: map[string]interface{}{
+		httpsecure.Namespace: map[string]interface{}{
 			"allowed_hosts": []interface{}{"host1", "subdomain1.host2", "subdomain2.host2"},
 		},
 	}

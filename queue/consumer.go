@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package amqp
+package queue
 
 import (
 	"bytes"
@@ -28,9 +28,9 @@ import (
 	"io"
 )
 
-const consumerNamespace = "github.com/starvn/sonic/amqp/consume"
+const consumerNamespace = "github.com/starvn/sonic/queue/consume"
 
-var errNoConsumerCfgDefined = errors.New("no amqp consumer defined")
+var errNoConsumerCfgDefined = errors.New("no queue consumer defined")
 var errNoBackendHostDefined = errors.New("no host backend defined")
 
 type consumerCfg struct {

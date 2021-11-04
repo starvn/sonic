@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+// Package jsonschema provides a JSONschema jsonschema for the Sonic API Gateway
 package jsonschema
 
 import (
@@ -31,7 +32,7 @@ import (
 	"strings"
 )
 
-const Namespace = "github.com/starvn/validator/jsonschema"
+const Namespace = "github.com/starvn/jsonschema"
 
 var ErrEmptyBody = errors.New("could not validate an empty body")
 

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package amqp
+package queue
 
 import (
 	"context"
@@ -29,9 +29,9 @@ import (
 	"time"
 )
 
-const producerNamespace = "github.com/starvn//sonic/amqp/produce"
+const producerNamespace = "github.com/starvn/sonic/queue/produce"
 
-var errNoProducerCfgDefined = errors.New("no amqp producer defined")
+var errNoProducerCfgDefined = errors.New("no queue producer defined")
 
 func getProducerConfig(remote *config.Backend) (*producerCfg, error) {
 	v, ok := remote.ExtraConfig[producerNamespace]

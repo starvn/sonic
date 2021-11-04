@@ -50,7 +50,7 @@ func ConfigGetter(e config.ExtraConfig) ([]InterpretableDefinition, bool) {
 	return def, true
 }
 
-const Namespace = "github.com/starvn/sonic/expl"
+const Namespace = "github.com/starvn/sonic/explang"
 
 var (
 	ErrParsing  = errors.New("cel: error parsing the expression")
