@@ -11,6 +11,7 @@ require (
 	github.com/google/cel-go v0.9.0
 	github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79
 	github.com/hashicorp/golang-lru v0.5.4
+	github.com/juju/ratelimit v1.0.1
 	github.com/mmcdole/gofeed v1.1.3
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
 	github.com/rs/cors v1.6.0
@@ -22,6 +23,7 @@ require (
 	github.com/unrolled/secure v1.0.9
 	github.com/yuin/gopher-lua v0.0.0-20190206043414-8bfc7677f583
 	golang.org/x/net v0.0.0-20210825183410-e898025ed96a
+	golang.org/x/time v0.0.0-20191024005414-555d28b269f0
 	gopkg.in/Graylog2/go-gelf.v2 v2.0.0-20191017102106-1550ee647df0
 )
 
