@@ -5,11 +5,13 @@ go 1.17
 require (
 	github.com/Masterminds/sprig v2.22.0+incompatible
 	github.com/alexeyco/binder v0.0.0-20180729220023-2a21303f588a
+	github.com/clbanning/mxj v1.8.4
 	github.com/eapache/go-resiliency v1.2.0
 	github.com/gin-gonic/gin v1.7.4
 	github.com/google/cel-go v0.9.0
 	github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79
 	github.com/hashicorp/golang-lru v0.5.4
+	github.com/mmcdole/gofeed v1.1.3
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
 	github.com/rs/cors v1.6.0
 	github.com/sony/gobreaker v0.5.0
@@ -19,13 +21,16 @@ require (
 	github.com/streadway/amqp v1.0.0
 	github.com/unrolled/secure v1.0.9
 	github.com/yuin/gopher-lua v0.0.0-20190206043414-8bfc7677f583
+	golang.org/x/net v0.0.0-20210825183410-e898025ed96a
 	gopkg.in/Graylog2/go-gelf.v2 v2.0.0-20191017102106-1550ee647df0
 )
 
 require (
 	github.com/Masterminds/goutils v1.1.1 // indirect
 	github.com/Masterminds/semver v1.5.0 // indirect
+	github.com/PuerkitoBio/goquery v1.5.1 // indirect
 	github.com/alecthomas/chroma v0.9.4 // indirect
+	github.com/andybalholm/cascadia v1.1.0 // indirect
 	github.com/antlr/antlr4/runtime/Go/antlr v0.0.0-20210826220005-b48c857c3a0e // indirect
 	github.com/dlclark/regexp2 v1.4.0 // indirect
 	github.com/fatih/color v1.9.0 // indirect
@@ -48,6 +53,7 @@ require (
 	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/mitchellh/mapstructure v1.4.2 // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
+	github.com/mmcdole/goxpp v0.0.0-20181012175147-0068e33feabf // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pelletier/go-toml v1.9.4 // indirect
