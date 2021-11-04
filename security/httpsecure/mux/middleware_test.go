@@ -17,7 +17,7 @@
 package mux
 
 import (
-	"github.com/starvn/sonic/http/secure"
+	"github.com/starvn/sonic/security/httpsecure"
 	"github.com/starvn/turbo/config"
 	"net/http"
 	"net/http/httptest"
@@ -26,7 +26,7 @@ import (
 
 func TestNewSecureMw(t *testing.T) {
 	cfg := config.ExtraConfig{
-		secure.Namespace: map[string]interface{}{
+		httpsecure.Namespace: map[string]interface{}{
 			"allowed_hosts": []interface{}{"host1", "subdomain1.host2", "subdomain2.host2"},
 		},
 	}

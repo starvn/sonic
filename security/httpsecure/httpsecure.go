@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-// Package secure provides a complete http security layer for the Sonic API Gateway
-package secure
+// Package httpsecure provides a complete http security layer for the Sonic API Gateway
+package httpsecure
 
 import (
 	"github.com/starvn/turbo/config"
 	"github.com/unrolled/secure"
 )
 
-const Namespace = "github.com/starvn/sonic/http/secure"
+const Namespace = "github.com/starvn/sonic/security/httpsecure"
 
 func ConfigGetter(e config.ExtraConfig) interface{} {
 	v, ok := e[Namespace]
@@ -41,7 +41,6 @@ func ConfigGetter(e config.ExtraConfig) interface{} {
 	getInt64(tmp, "sts_seconds", &cfg.STSSeconds)
 	getString(tmp, "custom_frame_options_value", &cfg.CustomFrameOptionsValue)
 	getString(tmp, "content_security_policy", &cfg.ContentSecurityPolicy)
-	getString(tmp, "public_key", &cfg.PublicKey)
 	getString(tmp, "ssl_host", &cfg.SSLHost)
 	getString(tmp, "referrer_policy", &cfg.ReferrerPolicy)
 	getBool(tmp, "content_type_nosniff", &cfg.ContentTypeNosniff)
