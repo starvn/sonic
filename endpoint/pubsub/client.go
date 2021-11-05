@@ -144,7 +144,7 @@ func (f *BackendFactory) initSubscriber(ctx context.Context, remote *config.Back
 		return proxy.NoopProxy, err
 	}
 
-	f.logger.Debug(logPrefix, "Subscriber initialized sucessfully")
+	f.logger.Debug(logPrefix, "Subscriber initialized successfully")
 
 	go func() {
 		<-ctx.Done()

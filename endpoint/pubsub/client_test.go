@@ -1,3 +1,6 @@
+//go:build integration
+// +build integration
+
 /*
  * Copyright (c) 2021 Huy Duc Dao
  *
@@ -104,7 +107,7 @@ func TestNew_subscriber(t *testing.T) {
 		t.Error(err)
 	}
 
-	if logging := buff.String(); strings.HasSuffix(logging, "DEBUG: [[BACKEND: mem://host/subscriber-topic-url][PubSub] Subscriber initialized sucessfully]") {
+	if logging := buff.String(); strings.HasSuffix(logging, "DEBUG: [[BACKEND: mem://host/subscriber-topic-url][PubSub] Subscriber initialized successfully]") {
 		t.Errorf("unexpected log: '%s'", logging)
 	}
 
@@ -151,7 +154,7 @@ func TestNew_publisher(t *testing.T) {
 	_, _ = prxy(context.Background(), &proxy.Request{Body: ioutil.NopCloser(bytes.NewBufferString(`{"foo":"bar"}`))})
 
 	lines := strings.Split(buff.String(), "\n")
-	if !strings.HasSuffix(lines[0], "DEBUG: [[BACKEND: mem://host/publisher-topic-url][PubSub] Publisher initialized sucessfully]") {
+	if !strings.HasSuffix(lines[0], "DEBUG: [[BACKEND: mem://host/publisher-topic-url][PubSub] Publisher initialized successfully]") {
 		t.Error("unexpected first log line:", lines[0])
 	}
 	if lines[1] != "" {
