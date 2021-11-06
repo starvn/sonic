@@ -18,6 +18,7 @@ require (
 	github.com/eapache/go-resiliency v1.2.0
 	github.com/gin-gonic/gin v1.7.4
 	github.com/google/cel-go v0.9.0
+	github.com/google/martian v2.1.1-0.20190517191504-25dcb96d9e51+incompatible
 	github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79
 	github.com/hashicorp/golang-lru v0.5.4
 	github.com/influxdata/influxdb v1.9.5
