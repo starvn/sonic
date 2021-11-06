@@ -205,9 +205,9 @@ func TestProxyFactory_reqParams_string(t *testing.T) {
 	expectedResponse := &proxy.Response{Data: map[string]interface{}{"ok": true}, IsComplete: true}
 
 	for _, expr := range []string{
-		"req_params.Nick in ['kpacha', 'alombarte']",
-		"req_params.Nick.matches('kpacha|alombarte')",
-		"req_params.Nick.matches('^(kpacha|alombarte)$')",
+		"req_params.Nick in ['starvn', 'alombarte']",
+		"req_params.Nick.matches('starvn|alombarte')",
+		"req_params.Nick.matches('^(starvn|alombarte)$')",
 	} {
 		buff := bytes.NewBuffer(make([]byte, 1024))
 		logger, err := log.NewLogger("INFO", buff, "pref")
@@ -235,7 +235,7 @@ func TestProxyFactory_reqParams_string(t *testing.T) {
 				success bool
 				nick    string
 			}{
-				{success: true, nick: "kpacha"},
+				{success: true, nick: "starvn"},
 				{success: false, nick: "bar"},
 				{success: true, nick: "alombarte"},
 				{success: false, nick: "foo"},
