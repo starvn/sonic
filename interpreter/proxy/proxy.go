@@ -78,7 +78,7 @@ func New(cfg lua.Config, next proxy.Proxy) proxy.Proxy {
 		})
 
 		lua.RegisterErrors(b)
-		registerHTTPRequest(b)
+		registerHTTPRequest(ctx, b)
 		registerRequestTable(req, b)
 
 		for _, source := range cfg.Sources {

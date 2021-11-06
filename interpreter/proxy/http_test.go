@@ -17,6 +17,7 @@
 package proxy
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"github.com/alexeyco/binder"
@@ -25,7 +26,7 @@ import (
 	"net/http/httptest"
 )
 
-func Example_registerBackendModule() {
+func Example_RegisterBackendModule() {
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		headers, _ := json.Marshal(r.Header)
 		fmt.Println(string(headers))
@@ -45,7 +46,7 @@ func Example_registerBackendModule() {
 		IncludeGoStackTrace: true,
 	})
 
-	registerHTTPRequest(bindr)
+	registerHTTPRequest(context.Background(), bindr)
 
 	code := fmt.Sprintf("local url = '%s'\n%s", ts.URL, sampleLuaCode)
 
@@ -56,21 +57,21 @@ func Example_registerBackendModule() {
 	// output:
 	// lua http test
 	//
-	// {"123":["456"],"Accept-Encoding":["gzip"],"Content-Length":["13"],"Foo":["bar"],"User-Agent":["Go-http-client/1.1"]}
+	// {"123":["456"],"Accept-Encoding":["gzip"],"Content-Length":["13"],"Foo":["bar"],"User-Agent":["Sonic Version undefined"]}
 	// POST
 	// {"foo":"bar"}
 	// 200
 	// text/plain; charset=utf-8
 	// Hello, client
 	//
-	// {"Accept-Encoding":["gzip"],"Content-Length":["13"],"User-Agent":["Go-http-client/1.1"]}
+	// {"Accept-Encoding":["gzip"],"Content-Length":["13"],"User-Agent":["Sonic Version undefined"]}
 	// POST
 	// {"foo":"bar"}
 	// 200
 	// text/plain; charset=utf-8
 	// Hello, client
 	//
-	// {"Accept-Encoding":["gzip"],"User-Agent":["Go-http-client/1.1"]}
+	// {"Accept-Encoding":["gzip"],"User-Agent":["Sonic Version undefined"]}
 	// GET
 	//
 	// 200
@@ -84,14 +85,15 @@ local r = http_response.new(url, "POST", '{"foo":"bar"}', {["foo"] = "bar", ["12
 print(r:statusCode())
 print(r:headers('Content-Type'))
 print(r:body())
-
+r:close()
 local r = http_response.new(url, "POST", '{"foo":"bar"}')
 print(r:statusCode())
 print(r:headers('Content-Type'))
 print(r:body())
-
+r:close()
 local r = http_response.new(url)
 print(r:statusCode())
 print(r:headers('Content-Type'))
 print(r:body())
+r:close()
 `
