@@ -114,7 +114,7 @@ func TestLogger_format(t *testing.T) {
 	expectedModuleName := "module_name"
 	expectedMsg := "mayday, mayday, mayday"
 	cfg := config.ExtraConfig{
-		golog.Namespace: map[string]interface{}{
+		gologging.Namespace: map[string]interface{}{
 			"level":  LEVEL_DEBUG,
 			"prefix": expectedModuleName,
 			"stdout": true,
