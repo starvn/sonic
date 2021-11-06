@@ -33,7 +33,7 @@ jobs:
 
     - name: Test
       run: |
-        go generate
+        go generate ./...
         go test -race -coverprofile=coverage.out -covermode=atomic ./...
       
     - name: Upload coverage to Codecov
