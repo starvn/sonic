@@ -13,6 +13,7 @@ require (
 	github.com/google/cel-go v0.9.0
 	github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79
 	github.com/hashicorp/golang-lru v0.5.4
+	github.com/influxdata/influxdb v1.9.5
 	github.com/juju/ratelimit v1.0.1
 	github.com/mmcdole/gofeed v1.1.3
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
@@ -118,7 +119,7 @@ require (
 	github.com/klauspost/compress v1.13.5 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/magiconair/properties v1.8.5 // indirect
-	github.com/mattn/go-colorable v0.1.6 // indirect
+	github.com/mattn/go-colorable v0.1.8 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
