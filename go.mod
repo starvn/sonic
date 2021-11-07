@@ -14,6 +14,7 @@ require (
 	github.com/alexeyco/binder v0.0.0-20180729220023-2a21303f588a
 	github.com/auth0-community/go-auth0 v1.0.0
 	github.com/aws/aws-sdk-go v1.40.34
+	github.com/catalinc/hashcash v0.0.0-20161205220751-e6bc29ff4de9
 	github.com/clbanning/mxj v1.8.4
 	github.com/eapache/go-resiliency v1.2.0
 	github.com/gin-gonic/gin v1.7.4
