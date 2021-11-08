@@ -1,0 +1,6 @@
+#!/bin/sh
+
+if [ "$1" = "1" ]; then
+	getent passwd sonic > /dev/null || \
+		useradd -r -M -s /sbin/nologin -c "sonic service account" sonic
+fi

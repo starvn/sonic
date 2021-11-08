@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-// Package explang provides a Common Expression Language (CEL) module for the Sonic API Gateway
+// Package explang provides a Common Expression Language (EXPLANG) module for the Sonic API Gateway
 package explang
 
 import (
@@ -30,7 +30,7 @@ import (
 
 func ProxyFactory(l log.Logger, pf proxy.Factory) proxy.Factory {
 	return proxy.FactoryFunc(func(cfg *config.EndpointConfig) (proxy.Proxy, error) {
-		logPrefix := "[ENDPOINT: " + cfg.Endpoint + "][CEL]"
+		logPrefix := "[ENDPOINT: " + cfg.Endpoint + "][EXPLANG]"
 		next, err := pf.New(cfg)
 		if err != nil {
 			return next, err
@@ -54,7 +54,7 @@ func ProxyFactory(l log.Logger, pf proxy.Factory) proxy.Factory {
 
 func BackendFactory(l log.Logger, bf proxy.BackendFactory) proxy.BackendFactory {
 	return func(cfg *config.Backend) proxy.Proxy {
-		logPrefix := "[BACKEND: " + cfg.URLPattern + "][CEL]"
+		logPrefix := "[BACKEND: " + cfg.URLPattern + "][EXPLANG]"
 		next := bf(cfg)
 
 		def, ok := internal.ConfigGetter(cfg.ExtraConfig)

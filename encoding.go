@@ -14,6 +14,17 @@
  * limitations under the License.
  */
 
-package route
+package sonic
 
-const Namespace = "github.com/starvn/sonic/modifier/interpreter/route"
+import (
+	"github.com/starvn/sonic/support/encoding/rss"
+	"github.com/starvn/sonic/support/encoding/xml"
+	ginxml "github.com/starvn/sonic/support/encoding/xml/gin"
+	"github.com/starvn/turbo/route/gin"
+)
+
+func RegisterEncoders() {
+	_ = xml.Register()
+	_ = rss.Register()
+	gin.RegisterRender(xml.Name, ginxml.Render)
+}

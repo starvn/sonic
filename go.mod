@@ -18,6 +18,7 @@ require (
 	github.com/clbanning/mxj v1.8.4
 	github.com/eapache/go-resiliency v1.2.0
 	github.com/gin-gonic/gin v1.7.4
+	github.com/go-contrib/uuid v1.2.0
 	github.com/google/cel-go v0.9.0
 	github.com/google/martian v2.1.1-0.20190517191504-25dcb96d9e51+incompatible
 	github.com/gregjones/httpcache v0.0.0-20190611155906-901d90724c79
@@ -33,8 +34,9 @@ require (
 	github.com/sony/gobreaker v0.5.0
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/viper v1.9.0
+	github.com/starvn/go-bloom-filter v1.0.0
 	github.com/starvn/opencensus-exporter-influxdb v1.0.0
-	github.com/starvn/turbo v1.0.0
+	github.com/starvn/turbo v1.0.3
 	github.com/streadway/amqp v1.0.0
 	github.com/unrolled/secure v1.0.9
 	github.com/xeipuuv/gojsonschema v1.2.0
@@ -172,6 +174,13 @@ require (
 	github.com/stoewer/go-strcase v1.2.0 // indirect
 	github.com/subosito/gotenv v1.2.0 // indirect
 	github.com/tinylib/msgp v1.1.2 // indirect
+	github.com/tmthrgd/atomics v0.0.0-20190904060638-dc7a5fcc7e0d // indirect
+	github.com/tmthrgd/go-bitset v0.0.0-20190904054048-394d9a556c05 // indirect
+	github.com/tmthrgd/go-bitwise v0.0.0-20190904053232-1430ee983fca // indirect
+	github.com/tmthrgd/go-byte-test v0.0.0-20190904060354-2794345b9929 // indirect
+	github.com/tmthrgd/go-hex v0.0.0-20190904060850-447a3041c3bc // indirect
+	github.com/tmthrgd/go-memset v0.0.0-20190904060434-6fb7a21f88f1 // indirect
+	github.com/tmthrgd/go-popcount v0.0.0-20190904054823-afb1ace8b04f // indirect
 	github.com/uber/jaeger-client-go v2.28.0+incompatible // indirect
 	github.com/ugorji/go/codec v1.2.6 // indirect
 	github.com/valyala/fastrand v1.1.0 // indirect
@@ -179,7 +188,7 @@ require (
 	github.com/xeipuuv/gojsonreference v0.0.0-20180127040603-bd5ef7bd5415 // indirect
 	golang.org/x/crypto v0.0.0-20210921155107-089bfa567519 // indirect
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
-	golang.org/x/sys v0.0.0-20211004093028-2c5d950f24ef // indirect
+	golang.org/x/sys v0.0.0-20211106132015-ebca88c72f68 // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	google.golang.org/api v0.56.0 // indirect

@@ -90,7 +90,7 @@ func (p Parser) Parse(definition InterpretableDefinition) (cel.Program, error) {
 	if expr == "" {
 		return nil, ErrNoExpr
 	}
-	p.l.Debug("[CEL]", fmt.Sprintf("Parsing expression: %v", expr))
+	p.l.Debug("[EXPLANG]", fmt.Sprintf("Parsing expression: %v", expr))
 	env, err := cel.NewEnv(defaultDeclarations())
 	if err != nil {
 		return nil, err
@@ -128,7 +128,7 @@ func (p Parser) parseByKey(definitions []InterpretableDefinition, key string) ([
 		}
 		v, err := p.Parse(def)
 		if _, ok := err.(ErrorChecking); ok {
-			p.l.Debug("[CEL]", err.Error())
+			p.l.Debug("[EXPLANG]", err.Error())
 			continue
 		}
 

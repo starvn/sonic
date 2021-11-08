@@ -27,8 +27,8 @@ import (
 )
 
 const (
-	ProxyNamespace   = "github.com/starvn/sonic/modifier/proxy"
-	BackendNamespace = "github.com/starvn/sonic/modifier/proxy/backend"
+	ProxyNamespace   = "github.com/starvn/sonic/modifier/interpreter/proxy"
+	BackendNamespace = "github.com/starvn/sonic/modifier/interpreter/proxy/backend"
 )
 
 func ProxyFactory(l log.Logger, pf proxy.Factory) proxy.Factory {

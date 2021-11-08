@@ -1,0 +1,23 @@
+{
+	"in": {
+		"method": "GET",
+		"url": "http://localhost:8080/param_forwarding/some/foo/bar",
+		"header": {
+			"User-Agent": "some",
+			"Origin": "http://foo.example.tld"
+		}
+	},
+	"out": {
+		"status_code": 200,
+		"body": "{\"foo\":42,\"headers\":{\"Accept-Encoding\":[\"gzip\"],\"User-Agent\":[\"Sonic Version 2.0.0-alpha\"],\"X-Forwarded-Host\":[\"localhost:8080\"]},\"path\":\"/param_forwarding/bar\",\"query\":{\"foo\":[\"foo\"]}}",
+		"header": {
+			"content-type": ["application/json; charset=utf-8"],
+			"Cache-Control": ["public, max-age=3600"],
+			"X-Sonic-Completed": ["true"],
+			"X-Sonic": ["Version 2.0.0-alpha"],
+			"Vary": ["Origin","Origin"],
+			"Access-Control-Allow-Origin": ["*"],
+			"Access-Control-Expose-Headers": ["Content-Length"]
+		}
+	}
+}

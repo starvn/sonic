@@ -14,6 +14,23 @@
  * limitations under the License.
  */
 
-package route
+package sonic
 
-const Namespace = "github.com/starvn/sonic/modifier/interpreter/route"
+import (
+	"context"
+	"github.com/starvn/turbo/config"
+	"github.com/starvn/turbo/discovery/dns"
+	"github.com/starvn/turbo/log"
+)
+
+func RegisterSubscriberFactories(ctx context.Context, cfg config.ServiceConfig, logger log.Logger) func(n string, p int) {
+	_ = dns.Register()
+
+	return func(name string, port int) {}
+}
+
+type registerSubscriberFactories struct{}
+
+func (d registerSubscriberFactories) Register(ctx context.Context, cfg config.ServiceConfig, logger log.Logger) func(n string, p int) {
+	return RegisterSubscriberFactories(ctx, cfg, logger)
+}

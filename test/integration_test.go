@@ -1,3 +1,6 @@
+//go:build integration
+// +build integration
+
 /*
  * Copyright (c) 2021 Huy Duc Dao
  *
@@ -14,6 +17,26 @@
  * limitations under the License.
  */
 
-package route
+package test
 
-const Namespace = "github.com/starvn/sonic/modifier/interpreter/route"
+import (
+	"testing"
+)
+
+func TestNewIntegration(t *testing.T) {
+	runner, tcs, err := NewIntegration(nil, nil, nil)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+	defer runner.Close()
+
+	for _, tc := range tcs {
+		tc := tc
+		t.Run(tc.Name, func(t *testing.T) {
+			if err := runner.Check(tc); err != nil {
+				t.Error(err)
+			}
+		})
+	}
+}

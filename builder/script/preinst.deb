@@ -1,0 +1,13 @@
+#!/bin/sh
+
+set -e
+
+USER=sonic
+
+if ! getent passwd $USER >/dev/null ; then
+  adduser --system --disabled-login --gecos "Sonic" --shell /bin/false --no-create-home $USER > /dev/null
+fi
+
+if [ -x "/etc/init.d/sonic" ] || [ -e "/etc/init/sonic.conf" ]; then
+	service sonic stop || exit $?
+fi

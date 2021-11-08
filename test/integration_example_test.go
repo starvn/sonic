@@ -1,3 +1,6 @@
+//go:build integration
+// +build integration
+
 /*
  * Copyright (c) 2021 Huy Duc Dao
  *
@@ -14,6 +17,27 @@
  * limitations under the License.
  */
 
-package route
+package test
 
-const Namespace = "github.com/starvn/sonic/modifier/interpreter/route"
+import (
+	"fmt"
+)
+
+func ExampleNewIntegration() {
+	runner, tcs, err := NewIntegration(nil, nil, nil)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	defer runner.Close()
+
+	for _, tc := range tcs {
+		if err := runner.Check(tc); err != nil {
+			fmt.Printf("%s: %s", tc.Name, err.Error())
+			return
+		}
+	}
+
+	// output:
+	// signal: killed
+}

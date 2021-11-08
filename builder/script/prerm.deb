@@ -1,0 +1,7 @@
+#!/bin/sh
+
+set -e
+
+if [ -x "/etc/init.d/sonic" ] || [ -e "/etc/init/sonic.conf" ]; then
+	invoke-rc.d sonic stop || exit $?
+fi

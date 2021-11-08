@@ -1,0 +1,590 @@
+{
+  "version": 1,
+  "name": "Sonic API Gateway",
+  "port": 8080,
+  "cache_ttl": "3600s",
+  "timeout": "3s",
+  "extra_config": {
+    "github.com/starvn/sonic/telemetry/gologging": {
+      "level":  "DEBUG",
+      "prefix": "[SONIC]",
+      "syslog": false,
+      "stdout": true
+    },
+    "github.com/starvn/sonic/telemetry/metrics": {
+      "collection_time": "60s",
+      "listen_address": ":8090"
+    },
+    "github.com/starvn/sonic/security/cors": {
+      "allow_origins": [ "*" ],
+      "allow_methods": [ "POST", "GET" ],
+      "allow_headers": [ "Origin", "Authorization", "Content-Type" ],
+      "expose_headers": [ "Content-Length" ],
+      "max_age": "12h"
+    },
+    "github.com/starvn/sonic/security/detector": {
+      "deny": ["a", "b"],
+      "allow": ["c", "Pingdom.com_bot_version_1.1"],
+      "patterns": [
+        "(Pingdom.com_bot_version_).*",
+        "(facebookexternalhit)/.*"
+      ]
+    }
+  },
+  "endpoints": [
+    {
+      "endpoint": "/crash",
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8081" ],
+          "url_pattern": "/unknown"
+        }
+      ]
+    },
+    {
+      "endpoint": "/no-op",
+      "method": "POST",
+      "output_encoding": "no-op",
+      "backend": [
+        {
+          "encoding": "no-op",
+          "host": [ "http://127.0.0.1:8081" ],
+          "url_pattern": "/param_forwarding/"
+        }
+      ]
+    },
+    {
+      "endpoint": "/xml/xml",
+      "output_encoding": "xml",
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8081" ],
+          "url_pattern": "/xml",
+          "encoding": "xml"
+        }
+      ]
+    },
+    {
+      "endpoint": "/xml/json",
+      "output_encoding": "xml",
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8081" ],
+          "url_pattern": "/param_forwarding"
+        }
+      ]
+    },
+    {
+      "endpoint": "/negotiate",
+      "method": "GET",
+      "output_encoding": "negotiate",
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8081" ],
+          "url_pattern": "/xml",
+          "encoding": "xml"
+        }
+      ]
+    },
+    {
+      "endpoint": "/static",
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8080" ],
+          "url_pattern": "/__debug",
+          "deny": ["message"]
+        }
+      ],
+      "extra_config": {
+        "github.com/starvn/turbo/proxy": {
+          "static": {
+            "strategy": "always",
+            "data": {
+              "foo": 42,
+              "bar": "foobar"
+            }
+          }
+        }
+      }
+    },
+    {
+      "endpoint": "/cel/req-resp/{id}",
+      "headers_to_pass": ["X-Header"],
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8080" ],
+          "url_pattern": "/__debug/{id}",
+          "group": "backend1",
+          "extra_config":{
+            "github.com/starvn/sonic/validation/explang": [
+              {
+                "check_expr": "int(req_params.Id) % 3 == 0"
+              }
+            ]
+          }
+        },
+        {
+          "host": [ "http://127.0.0.1:8080" ],
+          "url_pattern": "/__debug/{id}",
+          "group": "backend2",
+          "extra_config":{
+            "github.com/starvn/sonic/validation/explang": [
+              {
+                "check_expr": "int(req_params.Id) % 5 == 0"
+              }
+            ]
+          }
+        }
+      ],
+      "extra_config":{
+        "github.com/starvn/sonic/validation/explang": [
+          {
+            "check_expr": "'something' in req_headers['X-Header']"
+          },
+          {
+            "check_expr": "int(req_params.Id) % 2 == 0"
+          }
+        ]
+      }
+    },
+    {
+      "endpoint": "/cel/jwt/{id}",
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8080" ],
+          "url_pattern": "/__debug/{id}"
+        }
+      ],
+      "extra_config":{
+        "github.com/starvn/sonic/validation/explang": [
+          {
+            "check_expr": "size(JWT.roles)>1"
+          }
+        ],
+        "github.com/starvn/sonic/auth/jose/validator": {
+          "alg": "HS256",
+          "audience": ["http://api.example.com"],
+          "roles_key": "roles",
+          "issuer": "https://sonic.io",
+          "roles": ["role_a", "role_b", "role_y"],
+          "jwk_url": "http://127.0.0.1:8081/jwk/symmetric",
+          "disable_jwk_security": true
+        }
+      }
+    },
+    {
+      "endpoint": "/param_forwarding/some/{foo}/{bar}",
+      "headers_to_pass": [
+        "Authorization",
+        "X-Y-Z"
+      ],
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8081" ],
+          "url_pattern": "/param_forwarding/{bar}?foo={foo}"
+        }
+      ]
+    },
+    {
+      "endpoint": "/param_forwarding/some/{foo}/{bar}",
+      "method": "POST",
+      "headers_to_pass": [
+        "Authorization",
+        "X-Y-Z"
+      ],
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8081" ],
+          "url_pattern": "/param_forwarding/{bar}?foo={foo}"
+        }
+      ]
+    },
+    {
+      "endpoint": "/param_forwarding/all/{foo}/{bar}",
+      "headers_to_pass": [ "*" ],
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8081" ],
+          "url_pattern": "/param_forwarding/{bar}?foo={foo}"
+        }
+      ]
+    },
+    {
+      "endpoint": "/query_forwarding/all/{name}",
+      "querystring_params": [ "*" ],
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8081" ],
+          "url_pattern": "/param_forwarding/{name}"
+        }
+      ]
+    },
+    {
+      "endpoint": "/query_forwarding/some/{name}",
+      "querystring_params": [ "a" ],
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8081" ],
+          "url_pattern": "/param_forwarding/{name}"
+        }
+      ]
+    },
+    {
+      "endpoint": "/sequential/ok/{param}",
+      "extra_config": {
+        "github.com/starvn/turbo/proxy": {
+          "sequential": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/param_forwarding/{param}",
+          "host": [ "http://127.0.0.1:8081" ],
+          "allow": [ "foo" ]
+        },
+        {
+          "url_pattern": "/param_forwarding/{resp0_foo}",
+          "host": [ "http://127.0.0.1:8081" ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/sequential/incomplete/{param}",
+      "extra_config": {
+        "github.com/starvn/turbo/proxy": {
+          "sequential": true
+        }
+      },
+      "backend": [
+        {
+          "url_pattern": "/param_forwarding/{param}",
+          "host": [ "http://127.0.0.1:8081" ],
+          "allow": [ "foo" ]
+        },
+        {
+          "url_pattern": "/{resp0_foo}",
+          "host": [ "http://127.0.0.1:8081" ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/flatmap/{id}",
+      "method": "GET",
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8081" ],
+          "url_pattern": "/collection/{id}",
+          "is_collection": true,
+          "extra_config": {
+            "github.com/starvn/turbo/proxy": {
+              "flatmap_filter": [
+                {
+                  "type": "move",
+                  "args": ["collection", "paths"]
+                },
+                {
+                  "type": "del",
+                  "args": ["paths.*.i"]
+                },
+                {
+                  "type": "move",
+                  "args": ["paths.*.path", "paths.*.url"]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/combination/{id}",
+      "method": "GET",
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8081" ],
+          "url_pattern": "/collection/{id}",
+          "is_collection": true,
+          "mapping": {
+            "collection": "posts"
+          }
+        },
+        {
+          "host": [ "http://127.0.0.1:8081" ],
+          "url_pattern": "/param_forwarding/{id}",
+          "allow": [ "foo" ]
+        }
+      ]
+    },
+    {
+      "endpoint": "/show/{id}",
+      "backend": [
+        {
+          "host": [
+            "http://showrss.info/"
+          ],
+          "url_pattern": "/user/schedule/{id}.rss",
+          "encoding": "rss",
+          "group": "schedule",
+          "allow": ["title"],
+          "extra_config": {
+            "github.com/starvn/sonic/qos/circuitbreaker/gobreaker": {
+              "interval": 60,
+              "timeout": 10,
+              "max_errors": 1
+            },
+            "github.com/starvn/sonic/qos/httpcache": {}
+          }
+        },
+        {
+          "host": [
+            "http://showrss.info/"
+          ],
+          "url_pattern": "/user/{id}.rss",
+          "encoding": "rss",
+          "group": "available",
+          "allow": ["title"],
+          "extra_config": {
+            "github.com/starvn/sonic/qos/circuitbreaker/gobreaker": {
+              "interval": 60,
+              "timeout": 10,
+              "max_errors": 1
+            },
+            "github.com/starvn/sonic/qos/httpcache": {}
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/timeout",
+      "timeout": "100ms",
+      "backend": [
+        {
+          "host": ["http://127.0.0.1:8081"],
+          "url_pattern": "/param_forwarding/123",
+          "group": "first"
+        },
+        {
+          "host": ["http://127.0.0.1:8081"],
+          "url_pattern": "/delayed/",
+          "group": "second"
+        }
+      ]
+    },
+    {
+      "endpoint": "/detail_error",
+      "backend": [
+        {
+          "host": ["http://127.0.0.1:8081"],
+          "url_pattern": "/param_forwarding/",
+          "extra_config": {
+            "github.com/starvn/turbo/transport/http/client": {
+              "return_error_details": "backend_a"
+            }
+          }
+        },
+        {
+          "host": ["http://127.0.0.1:8081"],
+          "url_pattern": "/",
+          "extra_config": {
+            "github.com/starvn/turbo/transport/http/client": {
+              "return_error_details": "backend_b"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "endpoint": "/redirect/{code}",
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8081" ],
+          "url_pattern": "/redirect/?status={code}"
+        }
+      ]
+    },
+    {
+      "endpoint": "/private/custom",
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8080" ],
+          "url_pattern": "/__debug/",
+          "deny": ["message"]
+        }
+      ],
+      "extra_config": {
+        "github.com/starvn/turbo/proxy": {
+          "static": {
+            "strategy": "always",
+            "data": {
+              "id_user": 1,
+              "firstName": "John",
+              "lastName": "Smith",
+              "age": 25
+            }
+          }
+        },
+        "github.com/starvn/sonic/auth/jose/validator": {
+          "alg": "HS256",
+          "audience": ["http://api.example.com"],
+          "roles_key": "roles",
+          "issuer": "https://sonic.io",
+          "roles": ["role_a", "role_c"],
+          "jwk_url": "http://127.0.0.1:8081/jwk/symmetric",
+          "disable_jwk_security": true
+        }
+      }
+    },
+    {
+      "endpoint": "/private/extract_jwt_claim",
+      "backend": [
+        {
+          "url_pattern": "/param_forwarding/{JWT.sub}",
+          "host": [ "http://127.0.0.1:8081" ],
+          "deny": ["foo", "headers", "query"]
+        }
+      ],
+      "extra_config": {
+        "github.com/starvn/turbo/proxy": {
+          "static": {
+            "strategy": "always",
+            "data": {
+              "id_user": 1,
+              "firstName": "John",
+              "lastName": "Smith",
+              "age": 25
+            }
+          }
+        },
+        "github.com/starvn/sonic/auth/jose/validator": {
+          "alg": "HS256",
+          "audience": ["http://api.example.com"],
+          "roles_key": "roles",
+          "issuer": "https://sonic.io",
+          "roles": ["role_a", "role_c"],
+          "jwk_url": "http://127.0.0.1:8081/jwk/symmetric",
+          "disable_jwk_security": true
+        }
+      }
+    },
+    {
+      "endpoint": "/token",
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8080" ],
+          "url_pattern": "/__debug",
+          "deny": ["message"]
+        }
+      ],
+      "extra_config": {
+        "github.com/starvn/turbo/proxy": {
+          "static": {
+            "strategy": "always",
+            "data": {
+              "access_token": {
+                "aud": "http://api.example.com",
+                "iss": "https://sonic.io",
+                "sub": "1234567890qwertyuio",
+                "jti": "mnb23vcsrt756yuiomnbvcx98ertyuiop",
+                "roles": ["role_y"],
+                "exp": 1735689600
+              }
+            }
+          }
+        },
+        "github.com/starvn/sonic/auth/jose/signer": {
+          "alg": "HS256",
+          "kid": "sim2",
+          "keys_to_sign": ["access_token"],
+          "jwk_url": "http://127.0.0.1:8081/jwk/symmetric",
+          "disable_jwk_security": true
+        }
+      }
+    },
+    {
+      "endpoint": "/lua/collection",
+      "headers_to_pass": ["*"],
+      "backend": [
+        {
+          "host": [ "http://127.0.0.1:8081" ],
+          "url_pattern": "/collection/",
+          "is_collection": true,
+          "extra_config": {
+            "github.com/starvn/sonic/modifier/interpreter/proxy/backend": {
+              "sources": [
+                "./fixture/lua/json.lua",
+                "./fixture/lua/base64.lua",
+                "./fixture/lua/collection.lua"
+              ],
+              "pre": "pre_backend(request.load())",
+              "live": true,
+              "allow_open_libs": true
+            }
+          }
+        }
+      ],
+      "extra_config": {
+        "github.com/starvn/sonic/modifier/interpreter/proxy": {
+          "sources": [
+            "fixture/lua/json.lua",
+            "fixture/lua/base64.lua",
+            "fixture/lua/collection.lua"
+          ],
+          "post": "post_proxy(response.load())",
+          "live": true,
+          "allow_open_libs": true
+        }
+      }
+    },
+    {
+      "endpoint": "/lua/modify_response/fail",
+      "backend": [
+        {
+          "host": [ "http://www.mocky.io" ],
+          "url_pattern": "/v2/5d765eb4320000925b297af6",
+          "group": "source_result"
+        }
+      ],
+      "extra_config": {
+        "github.com/starvn/sonic/modifier/interpreter/proxy": {
+          "sources": [
+            "fixture/lua/pdecorator.lua"
+          ],
+          "post": "post_proxy_decorator(response.load())",
+          "allow_open_libs": true
+        }
+      }
+    },
+    {
+      "endpoint": "/lua/modify_response/success",
+      "backend": [
+        {
+          "host": [ "http://www.mocky.io" ],
+          "url_pattern": "/v2/5d765f653200004f25297afd",
+          "group": "source_result"
+        }
+      ],
+      "extra_config": {
+        "github.com/starvn/sonic/modifier/interpreter/proxy": {
+          "sources": [
+            "fixture/lua/pdecorator.lua"
+          ],
+          "post": "post_proxy_decorator(response.load())",
+          "allow_open_libs": true
+        }
+      }
+    },
+    {
+      "endpoint": "/jsonschema",
+      "method": "POST",
+      "backend": [
+        {
+          "host": ["http://127.0.0.1:8081"],
+          "url_pattern": "/"
+        }
+      ],
+      "extra_config":{
+        "github.com/starvn/sonic/validation/jsonschema": {"type": "number"}
+      }
+    }
+  ]
+}

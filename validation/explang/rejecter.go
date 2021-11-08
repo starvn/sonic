@@ -26,7 +26,7 @@ import (
 )
 
 func NewRejecter(l log.Logger, cfg *config.EndpointConfig) *Rejecter {
-	logPrefix := "[ENDPOINT: " + cfg.Endpoint + "][CEL]"
+	logPrefix := "[ENDPOINT: " + cfg.Endpoint + "][EXPLANG]"
 	def, ok := internal.ConfigGetter(cfg.ExtraConfig)
 	if !ok {
 		return nil
