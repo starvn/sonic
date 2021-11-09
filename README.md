@@ -1,4 +1,4 @@
-![Sonic](./docs/image/sonic-api-gateway.jpg)
+![Sonic](./docs/image/sonic-api-gateway.png)
 
 # Sonic API Gateway
 
