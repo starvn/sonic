@@ -1,4 +1,4 @@
-![Sonic](./docs/image/sonic-api-gateway.png)
+<img src="./docs/image/sonic-api-gateway.png" alt="Sonic API Gateway" width="20%"/>
 
 # Sonic API Gateway
 
